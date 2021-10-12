@@ -26,6 +26,8 @@
   <meta name="apple-mobile-web-app-title" content="take_home_project">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
+  <meta name="google-signin-client_id" content="357734772078-qqickjtmir4ke5qsrfobtig9lv3kae94.apps.googleusercontent.com">
+
   <title>take_home_project</title>
   <link rel="manifest" href="manifest.json">
 </head>
@@ -96,6 +98,20 @@
       // Service workers not supported. Just drop the <script> tag.
       loadMainDartJs();
     }
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAF88BoJKbcq-000_5gPWG_rL2-OHpykBo",
+      authDomain: "take-home-project-5670e.firebaseapp.com",
+      projectId: "take-home-project-5670e",
+      storageBucket: "take-home-project-5670e.appspot.com",
+      messagingSenderId: "357734772078",
+      appId: "1:357734772078:web:2d09d5eb16096959b6a57f",
+      measurementId: "G-GL5QVHQY0Z"
+    };
+    firebase.initializeApp(firebaseConfig);
   </script>
 </body>
 </html>
