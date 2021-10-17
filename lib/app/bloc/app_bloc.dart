@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:take_home_project/entities/user.dart';
+import 'package:take_home_project/app/app.dart';
 import 'package:take_home_project/repositories/auth_repository.dart';
 
 part 'app_event.dart';

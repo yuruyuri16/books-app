@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:take_home_project/login/inputs/email.dart';
-import 'package:take_home_project/login/inputs/password.dart';
+import 'package:take_home_project/login/login.dart';
 import 'package:take_home_project/repositories/auth_repository.dart';
 
 part 'login_state.dart';

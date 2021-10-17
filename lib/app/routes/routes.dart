@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:take_home_project/app/app.dart';
-import 'package:take_home_project/home/view/home_page.dart';
-import 'package:take_home_project/login/view/login_page.dart';
+import 'package:take_home_project/home/home.dart';
+import 'package:take_home_project/login/login.dart';
 
 List<Page> onGenerateAppViewPages(AppStatus state, List<Page<dynamic>> pages) {
   switch (state) {
