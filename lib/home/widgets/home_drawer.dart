@@ -20,9 +20,16 @@ class HomeDrawer extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      radius: 30,
-                      backgroundImage: NetworkImage(user.photo!),
-                    ),
+                        radius: 30,
+                        backgroundImage: user.photo == null
+                            ? null
+                            : NetworkImage(user.photo!),
+                        child: user.photo == null
+                            ? const Icon(
+                                Icons.person,
+                                size: 30,
+                              )
+                            : null),
                     const SizedBox(
                       width: 20,
                     ),
@@ -31,7 +38,7 @@ class HomeDrawer extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            user.name!,
+                            user.name ?? '',
                             style: const TextStyle(fontSize: 20),
                             overflow: TextOverflow.ellipsis,
                           ),

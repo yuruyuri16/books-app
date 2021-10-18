@@ -5,5 +5,4 @@ export 'home_error.dart';
 export 'home_heading.dart';
 export 'home_loading.dart';
 export 'home_search_field.dart';
-export 'home_sliver.dart';
 export 'home_title.dart';

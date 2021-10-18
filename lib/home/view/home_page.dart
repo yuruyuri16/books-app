@@ -30,7 +30,7 @@ class HomeView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             const HomeTitle('Explore thousands of books on the go'),
             HomeSearchField(
               'Search for books...',
@@ -61,7 +61,7 @@ class HomeView extends StatelessWidget {
 
   AppBar _appBar() {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       foregroundColor: Colors.black,
       elevation: 0,
     );

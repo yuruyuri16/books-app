@@ -1,12 +1,14 @@
 part of 'book_bloc.dart';
 
-enum BookStatus { loading, loaded, failure }
+enum BookStatus { initial, loading, loaded, failure }
 
 class BookState extends Equatable {
   const BookState._({
     required this.status,
     this.books = const [],
   });
+
+  const BookState.initial() : this._(status: BookStatus.initial);
 
   const BookState.loading() : this._(status: BookStatus.loading);
 

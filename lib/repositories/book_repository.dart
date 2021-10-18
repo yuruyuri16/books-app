@@ -23,24 +23,35 @@ class BookRepository {
 
     final res = await _httpClient.get(bookRequest);
 
-    if (res.statusCode != 200) {
-      throw BooksRequestFailure();
-    }
+    if (res.statusCode != 200) throw BooksRequestFailure();
 
     final responseJson = jsonDecode(res.body) as Map<String, dynamic>;
 
-    if (responseJson.isEmpty) {
-      throw BooksNotFoundFailure();
-    }
+    if (responseJson.isEmpty) throw BooksNotFoundFailure();
+
     final response = Response.fromJson(responseJson);
     return response.items;
   }
 
-  Future<void> getBooksByName(String name) async {
+  Future<List<Book>> getBooksByName(String name) async {
+    if (name == '') return getBooks();
+
     final bookRequest = Uri.https(
       _baseUrl,
       '/books/v1/volumes',
-      <String, String>{'q': name},
+      <String, String>{'q': name.replaceAll(' ', '+')},
     );
+
+    final res = await _httpClient.get(bookRequest);
+
+    if (res.statusCode != 200) throw BooksRequestFailure();
+
+    final responseJson = jsonDecode(res.body) as Map<String, dynamic>;
+
+    if (responseJson.isEmpty) throw BooksNotFoundFailure();
+
+    final response = Response.fromJson(responseJson);
+
+    return response.items;
   }
 }

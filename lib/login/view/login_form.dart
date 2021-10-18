@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:formz/formz.dart';
 import 'package:take_home_project/login/login.dart';
+import 'package:take_home_project/sign_up/sign_up.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class LoginForm extends StatelessWidget {
               const _EmailField(),
               const SizedBox(height: 8),
               const _PasswordField(),
-              const SizedBox(height: 8),
+              const SizedBox(height: 16),
               const _LoginButton(),
               const SizedBox(height: 8),
               Row(
@@ -93,7 +94,6 @@ class _PasswordField extends StatelessWidget {
           obscureText: true,
           decoration: InputDecoration(
             labelText: 'password',
-            helperText: '',
             errorText: state.password.invalid ? 'invalid password' : null,
           ),
         );
@@ -111,7 +111,7 @@ class _LoginButton extends StatelessWidget {
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         return state.status.isSubmissionInProgress
-            ? const CircularProgressIndicator()
+            ? const Center(child: CircularProgressIndicator())
             : ElevatedButton(
                 onPressed: state.status.isValidated
                     ? () => context.read<LoginCubit>().logInWithCredentials()
@@ -160,7 +160,7 @@ class _SignUpButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return TextButton(
-      onPressed: () {},
+      onPressed: () => Navigator.push<void>(context, SignUpPage.route()),
       child: Text(
         'Sign up',
         style: TextStyle(color: theme.primaryColor),

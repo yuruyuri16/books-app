@@ -9,12 +9,16 @@ part 'book_state.dart';
 class BookBloc extends Bloc<BookEvent, BookState> {
   BookBloc({required BookRepository bookRepository})
       : _bookRepository = bookRepository,
-        super(const BookState.loading()) {
+        super(const BookState.initial()) {
     on<FetchBooks>(_onFetchBooks);
+    on<SearchBooks>(_onSearchBooks);
   }
+
+  final BookRepository _bookRepository;
 
   Future<void> _onFetchBooks(FetchBooks event, Emitter<BookState> emit) async {
     try {
+      emit(const BookState.loading());
       final books = await _bookRepository.getBooks();
       emit(BookState.success(books));
     } catch (_) {
@@ -22,5 +26,14 @@ class BookBloc extends Bloc<BookEvent, BookState> {
     }
   }
 
-  final BookRepository _bookRepository;
+  Future<void> _onSearchBooks(
+      SearchBooks event, Emitter<BookState> emit) async {
+    try {
+      emit(const BookState.loading());
+      final books = await _bookRepository.getBooksByName(event.bookField);
+      emit(BookState.success(books));
+    } catch (_) {
+      emit(const BookState.failure());
+    }
+  }
 }

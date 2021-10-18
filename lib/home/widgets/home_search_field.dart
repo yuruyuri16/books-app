@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:take_home_project/home/home.dart';
 
 class HomeSearchField extends StatelessWidget {
-  const HomeSearchField(this.hintText, {Key? key, required this.controller})
-      : super(key: key);
+  const HomeSearchField(
+    this.hintText, {
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   final String hintText;
   final TextEditingController controller;
@@ -27,6 +32,9 @@ class HomeSearchField extends StatelessWidget {
       child: TextField(
         controller: controller,
         textInputAction: TextInputAction.search,
+        onSubmitted: (input) async {
+          context.read<BookBloc>().add(SearchBooks(controller.text));
+        },
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
