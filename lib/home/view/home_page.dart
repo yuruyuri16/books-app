@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:take_home_project/home/home.dart';
 import 'package:take_home_project/repositories/book_repository.dart';
+import 'package:take_home_project/repositories/favorite_repository.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

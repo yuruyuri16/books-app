@@ -1,4 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:take_home_project/app/app.dart';
+import 'package:take_home_project/home/home.dart';
+import 'package:take_home_project/repositories/favorite_repository.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({
@@ -18,6 +23,8 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((AppBloc bloc) => bloc.state.user);
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,
@@ -25,9 +32,36 @@ class DetailPage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         foregroundColor: Colors.black,
+        titleSpacing: 0,
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: BlocProvider(
+              create: (context) =>
+                  FavoriteBloc(favoriteRepository: FavoriteRepository())
+                    ..add(LoadFavorite(user.id, id)),
+              child: BlocBuilder<FavoriteBloc, FavoriteState>(
+                builder: (context, state) {
+                  if (state is FavoriteLoaded) {
+                    final favorite = state.favorite;
+                    return GestureDetector(
+                        onTap: () => context
+                            .read<FavoriteBloc>()
+                            .add(UpdateFavorite(user.id, id)),
+                        child: Icon(state.favorite
+                            ? Icons.favorite
+                            : Icons.favorite_border));
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
+            ),
+          )
+        ],
       ),
       body: SafeArea(
-        minimum: const EdgeInsets.all(15),
+        minimum: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -36,7 +70,7 @@ class DetailPage extends StatelessWidget {
               child: _image(),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(
+              margin: const EdgeInsets.symmetric(
                 vertical: 20,
               ),
               child: Column(
@@ -62,7 +96,8 @@ class DetailPage extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Text(
-                  description == null ? 'No description' : description!,
+                  description ?? 'No description',
+                  textAlign: TextAlign.justify,
                 ),
               ),
             ),
